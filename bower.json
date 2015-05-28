@@ -1,0 +1,25 @@
+{
+  "name": "datatables-searchhighlight",
+  "version": "1",
+  "homepage": "https://github.com/biofavor/dtsh",
+  "description": "for datatables",
+  "main": [
+    "dataTables.searchHighlight.css",
+    "dataTables.searchHighlight.js"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "keywords": [
+    "datatables"
+  ],
+  "authors": [
+    "biofavor",
+    "allen"
+  ]
+}
