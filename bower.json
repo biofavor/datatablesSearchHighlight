@@ -6,7 +6,7 @@
   "main": [
     "dataTables.searchHighlight.css",
     "dataTables.searchHighlight.js",
-	  "jquery.highlight.js"
+    "jquery.highlight.js"
   ],
   "license": "MIT",
   "ignore": [
