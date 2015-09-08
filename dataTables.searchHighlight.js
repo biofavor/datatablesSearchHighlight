@@ -10,7 +10,7 @@
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
  * @copyright   Copyright 2014 SpryMedia Ltd.
- * 
+ *
  * License      MIT - http://datatables.net/license/mit
  *
  * This feature plug-in for DataTables will highlight search terms in the
@@ -35,44 +35,44 @@
 
 (function(window, document, $){
 
+	function highlight( body, table )
+	{
+		// Removing the old highlighting first
+		body.unhighlight();
 
-function highlight( body, table )
-{
-	// Removing the old highlighting first
-	body.unhighlight();
-
-	// Don't highlight the "not found" row, so we get the rows using the api
-	if ( table.rows( { filter: 'applied' } ).data().length ) {
-		body.highlight( $.trim( table.search() ).split(/\s+/) );
-	}
-}
-
-// Listen for DataTables initialisations
-$(document).on( 'init.dt.dth', function (e, settings, json) {
-	if ( e.namespace !== 'dt' ) {
-		return;
-	}
-
-	var table = new $.fn.dataTable.Api( settings );
-	var body = $( table.table().body() );
-
-	if (
-		$( table.table().node() ).hasClass( 'searchHighlight' ) || // table has class
-		settings.oInit.searchHighlight                          || // option specified
-		$.fn.dataTable.defaults.searchHighlight                    // default set
-	) {
-		table
-			.on( 'draw.dt.dth column-visibility.dt.dth column-reorder.dt.dth', function () {
-				highlight( body, table );
-			} )
-			.on( 'destroy', function () {
-				// Remove event handler
-				table.off( 'draw.dt.dth column-visibility.dt.dth column-reorder.dt.dth' );
-			} );
-
-		// initial highlight for state saved conditions and initial states
-		if ( table.search() ) {
-			highlight( body, table );
+		// Don't highlight the "not found" row, so we get the rows using the api
+		if ( table.rows( { filter: 'applied' } ).data().length ) {
+			body.highlight( $.trim( table.search() ).split(/\s+/) );
 		}
 	}
-} );
+
+	// Listen for DataTables initialisations
+	$(document).on( 'init.dt.dth', function (e, settings) {
+		if ( e.namespace !== 'dt' ) {
+			return;
+		}
+
+		var table = new $.fn.dataTable.Api( settings );
+		var body = $( table.table().body() );
+
+		if (
+			$( table.table().node() ).hasClass( 'searchHighlight' ) || // table has class
+			settings.oInit.searchHighlight                          || // option specified
+			$.fn.dataTable.defaults.searchHighlight                    // default set
+		) {
+			table
+				.on( 'draw.dt.dth column-visibility.dt.dth column-reorder.dt.dth', function () {
+					highlight( body, table );
+				} )
+				.on( 'destroy', function () {
+					// Remove event handler
+					table.off( 'draw.dt.dth column-visibility.dt.dth column-reorder.dt.dth' );
+				} );
+
+			// initial highlight for state saved conditions and initial states
+			if ( table.search() ) {
+				highlight( body, table );
+			}
+		}
+	});
+})(window, document, jQuery);
