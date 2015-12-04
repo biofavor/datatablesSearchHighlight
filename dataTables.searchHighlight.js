@@ -76,3 +76,4 @@ $(document).on( 'init.dt.dth', function (e, settings, json) {
 		}
 	}
 } );
+} )(window, document, jQuery);
